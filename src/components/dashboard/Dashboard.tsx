@@ -1,0 +1,131 @@
+import { useState, useMemo } from 'react';
+import { Employee, FilterState, TabType } from '@/types/employee';
+import { FilterBar } from './FilterBar';
+import { OverviewTab } from './OverviewTab';
+import { BirthdaysTab } from './BirthdaysTab';
+import { SalaryTab } from './SalaryTab';
+import { MapTab } from './MapTab';
+import { ProfileTab } from './ProfileTab';
+import { OvertimeTab } from './OvertimeTab';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/components/ui/button';
+import { LogOut, LayoutDashboard, Cake, Banknote, MapPin, User, Clock } from 'lucide-react';
+
+interface DashboardProps {
+  data: Employee[];
+  onLogout: () => void;
+}
+
+export function Dashboard({ data, onLogout }: DashboardProps) {
+  const [filters, setFilters] = useState<FilterState>({
+    gender: 'All',
+    education: 'All',
+    department: 'All',
+    location: 'All',
+    position: 'All',
+  });
+
+  const [activeTab, setActiveTab] = useState<TabType>('overview');
+
+  // Get unique values for filters
+  const filterOptions = useMemo(() => ({
+    genders: [...new Set(data.map(e => e.gender))],
+    educations: [...new Set(data.map(e => e.education))].filter(Boolean),
+    departments: [...new Set(data.map(e => e.department))].filter(Boolean),
+    locations: [...new Set(data.map(e => e.location))].filter(Boolean),
+    positions: [...new Set(data.map(e => e.position))].filter(Boolean),
+  }), [data]);
+
+  // Filter data based on current filters
+  const filteredData = useMemo(() => {
+    return data.filter(e => {
+      if (filters.gender !== 'All' && e.gender !== filters.gender) return false;
+      if (filters.education !== 'All' && e.education !== filters.education) return false;
+      if (filters.department !== 'All' && e.department !== filters.department) return false;
+      if (filters.location !== 'All' && e.location !== filters.location) return false;
+      if (filters.position !== 'All' && e.position !== filters.position) return false;
+      return true;
+    });
+  }, [data, filters]);
+
+  const handleFilterChange = (key: keyof FilterState, value: string) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
+  };
+
+  const tabs = [
+    { id: 'overview' as TabType, label: 'نمای کلی', icon: LayoutDashboard },
+    { id: 'birthdays' as TabType, label: 'تولدها', icon: Cake },
+    { id: 'salary' as TabType, label: 'حقوق', icon: Banknote },
+    { id: 'map' as TabType, label: 'نقشه', icon: MapPin },
+    { id: 'profile' as TabType, label: 'پروفایل', icon: User },
+    { id: 'overtime' as TabType, label: 'اضافه کار', icon: Clock },
+  ];
+
+  return (
+    <div className="min-h-screen bg-background p-4 md:p-6">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold gradient-text">داشبورد منابع انسانی</h1>
+          <p className="text-muted-foreground text-sm mt-1">تحلیل و گزارش‌گیری اطلاعات پرسنلی</p>
+        </div>
+        <Button variant="outline" onClick={onLogout} className="gap-2">
+          <LogOut className="w-4 h-4" />
+          خروج
+        </Button>
+      </div>
+
+      {/* Filter Bar */}
+      <FilterBar
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        options={filterOptions}
+      />
+
+      {/* Tabs */}
+      <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as TabType)} className="space-y-6">
+        <TabsList className="glass-card p-1 h-auto flex flex-wrap gap-1 justify-center">
+          {tabs.map((tab) => (
+            <TabsTrigger
+              key={tab.id}
+              value={tab.id}
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground gap-2 px-4 py-2"
+            >
+              <tab.icon className="w-4 h-4" />
+              <span className="hidden sm:inline">{tab.label}</span>
+            </TabsTrigger>
+          ))}
+        </TabsList>
+
+        <TabsContent value="overview" className="mt-0">
+          <OverviewTab data={filteredData} />
+        </TabsContent>
+
+        <TabsContent value="birthdays" className="mt-0">
+          <BirthdaysTab data={filteredData} />
+        </TabsContent>
+
+        <TabsContent value="salary" className="mt-0">
+          <SalaryTab data={filteredData} />
+        </TabsContent>
+
+        <TabsContent value="map" className="mt-0">
+          <MapTab data={filteredData} />
+        </TabsContent>
+
+        <TabsContent value="profile" className="mt-0">
+          <ProfileTab data={filteredData} />
+        </TabsContent>
+
+        <TabsContent value="overtime" className="mt-0">
+          <OvertimeTab data={filteredData} />
+        </TabsContent>
+      </Tabs>
+
+      {/* Footer */}
+      <div className="mt-8 text-center text-xs text-muted-foreground">
+        <p>تعداد رکوردهای نمایش داده شده: {filteredData.length} از {data.length}</p>
+      </div>
+    </div>
+  );
+}
