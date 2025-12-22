@@ -24,15 +24,18 @@ export function PrintButton({ title = 'گزارش داشبورد منابع ان
           left: 0;
           top: 0;
           width: 100%;
+          direction: rtl;
         }
         .print-header {
           display: flex !important;
+          flex-direction: row-reverse;
           align-items: center;
-          justify-content: center;
+          justify-content: flex-start;
           gap: 16px;
           padding: 20px;
           border-bottom: 2px solid #1e3a5f;
           margin-bottom: 20px;
+          width: 100%;
         }
         .print-header img {
           height: 60px;
@@ -41,9 +44,23 @@ export function PrintButton({ title = 'گزارش داشبورد منابع ان
         .print-header h1 {
           font-size: 24px;
           color: #1e3a5f;
+          flex-grow: 1;
+          text-align: right;
         }
         .no-print {
           display: none !important;
+        }
+        .recharts-wrapper,
+        .recharts-surface {
+          width: 100% !important;
+          height: auto !important;
+        }
+        .grid {
+          display: block !important;
+        }
+        .grid > div {
+          margin-bottom: 20px;
+          page-break-inside: avoid;
         }
       }
     `;
