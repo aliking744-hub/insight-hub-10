@@ -35,10 +35,10 @@ export function OverviewTab({ data }: OverviewTabProps) {
     '40-50': 45, '۴۰-۵۰': 45,
     '50+': 55, '۵۰+': 55,
   };
-  const validAges = data.filter(e => e.ageGroup && ageGroupToAvg[e.ageGroup]);
+  const validAges = data.filter(e => e.ageGroup && e.ageGroup !== 'blank' && e.ageGroup !== '' && ageGroupToAvg[e.ageGroup]);
   const avgAge = validAges.length > 0 
-    ? Math.round(validAges.reduce((sum, e) => sum + ageGroupToAvg[e.ageGroup], 0) / validAges.length)
-    : 0;
+    ? (validAges.reduce((sum, e) => sum + ageGroupToAvg[e.ageGroup], 0) / validAges.length).toFixed(2)
+    : '۰';
 
   // Gender distribution
   const genderData = [
@@ -115,7 +115,7 @@ export function OverviewTab({ data }: OverviewTabProps) {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4">
         <KPICard title="تعداد معاونت" value={formatNumber(departments)} icon={Building2} color="cyan" />
         <KPICard title="تعداد پرسنل" value={formatNumber(totalStaff)} icon={Users} color="pink" />
-        <KPICard title="میانگین سنی" value={formatNumber(avgAge)} icon={Calendar} color="orange" />
+        <KPICard title="میانگین سنی" value={String(avgAge)} icon={Calendar} color="orange" />
         <KPICard title="میانگین حقوق" value={formatNumber(avgSalary)} icon={Banknote} color="green" />
         <KPICard title="میانگین سابقه کاری" value={formatNumber(avgTenure)} icon={Clock} color="purple" />
       </div>
