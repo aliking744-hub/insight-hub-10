@@ -36,9 +36,10 @@ export function OverviewTab({ data }: OverviewTabProps) {
     '50+': 55, '۵۰+': 55,
   };
   const validAges = data.filter(e => e.ageGroup && e.ageGroup !== 'blank' && e.ageGroup !== '' && ageGroupToAvg[e.ageGroup]);
-  const avgAge = validAges.length > 0 
+  const avgAgeNum = validAges.length > 0 
     ? (validAges.reduce((sum, e) => sum + ageGroupToAvg[e.ageGroup], 0) / validAges.length).toFixed(2)
-    : '۰';
+    : '0';
+  const avgAge = avgAgeNum.toString().replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[parseInt(d)]);
 
   // Gender distribution
   const genderData = [
