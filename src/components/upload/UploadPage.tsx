@@ -5,7 +5,7 @@ import { toast } from '@/hooks/use-toast';
 import * as XLSX from 'xlsx';
 import { Employee } from '@/types/employee';
 import { parseExcelData, generateSampleData } from '@/utils/sampleData';
-import logoWhite from '@/assets/logo-white.png';
+import logoGlow from '@/assets/logo-glow.png';
 interface UploadPageProps {
   onDataLoaded: (data: Employee[]) => void;
 }
@@ -137,9 +137,9 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center mb-6">
             <img 
-              src={logoWhite} 
+              src={logoGlow} 
               alt="hring logo" 
-              className="h-24 md:h-28 w-auto animate-pulse-glow rounded-2xl"
+              className="h-20 md:h-24 w-auto animate-pulse-glow"
             />
           </div>
           <h1 className="text-3xl md:text-4xl font-bold gradient-text mb-3">
