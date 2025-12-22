@@ -34,11 +34,11 @@ export interface Employee {
 }
 
 export interface FilterState {
-  gender: string;
-  education: string;
-  department: string;
-  location: string;
-  position: string;
+  gender: string[];
+  education: string[];
+  department: string[];
+  location: string[];
+  position: string[];
 }
 
 export type TabType = 'overview' | 'birthdays' | 'salary' | 'map' | 'profile' | 'overtime';

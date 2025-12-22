@@ -22,11 +22,11 @@ interface DashboardProps {
 export function Dashboard({ data, onLogout }: DashboardProps) {
   const { theme } = useTheme();
   const [filters, setFilters] = useState<FilterState>({
-    gender: 'All',
-    education: 'All',
-    department: 'All',
-    location: 'All',
-    position: 'All',
+    gender: [],
+    education: [],
+    department: [],
+    location: [],
+    position: [],
   });
 
   const [activeTab, setActiveTab] = useState<TabType>('overview');
@@ -43,16 +43,16 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
   // Filter data based on current filters
   const filteredData = useMemo(() => {
     return data.filter(e => {
-      if (filters.gender !== 'All' && e.gender !== filters.gender) return false;
-      if (filters.education !== 'All' && e.education !== filters.education) return false;
-      if (filters.department !== 'All' && e.department !== filters.department) return false;
-      if (filters.location !== 'All' && e.location !== filters.location) return false;
-      if (filters.position !== 'All' && e.position !== filters.position) return false;
+      if (filters.gender.length > 0 && !filters.gender.includes(e.gender)) return false;
+      if (filters.education.length > 0 && !filters.education.includes(e.education)) return false;
+      if (filters.department.length > 0 && !filters.department.includes(e.department)) return false;
+      if (filters.location.length > 0 && !filters.location.includes(e.location)) return false;
+      if (filters.position.length > 0 && !filters.position.includes(e.position)) return false;
       return true;
     });
   }, [data, filters]);
 
-  const handleFilterChange = (key: keyof FilterState, value: string) => {
+  const handleFilterChange = (key: keyof FilterState, value: string[]) => {
     setFilters(prev => ({ ...prev, [key]: value }));
   };
 
