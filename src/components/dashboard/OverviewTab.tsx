@@ -2,7 +2,7 @@ import { Employee } from '@/types/employee';
 import { KPICard } from './KPICard';
 import { ChartCard } from './ChartCard';
 import { PrintButton } from './PrintButton';
-import { Users, Building2, Banknote, Clock } from 'lucide-react';
+import { Users, Building2, Banknote, Clock, Calendar } from 'lucide-react';
 import {
   PieChart, Pie, Cell, ResponsiveContainer,
   BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Area, AreaChart
@@ -27,6 +27,18 @@ export function OverviewTab({ data }: OverviewTabProps) {
   const departments = [...new Set(data.map(e => e.department))].length;
   const avgSalary = Math.round(data.reduce((sum, e) => sum + e.salary, 0) / totalStaff);
   const avgTenure = Math.round(data.reduce((sum, e) => sum + e.tenure, 0) / totalStaff);
+  
+  // Calculate average age from age groups
+  const ageGroupToAvg: Record<string, number> = {
+    '20-30': 25, '۲۰-۳۰': 25,
+    '30-40': 35, '۳۰-۴۰': 35,
+    '40-50': 45, '۴۰-۵۰': 45,
+    '50+': 55, '۵۰+': 55,
+  };
+  const validAges = data.filter(e => e.ageGroup && ageGroupToAvg[e.ageGroup]);
+  const avgAge = validAges.length > 0 
+    ? Math.round(validAges.reduce((sum, e) => sum + ageGroupToAvg[e.ageGroup], 0) / validAges.length)
+    : 0;
 
   // Gender distribution
   const genderData = [
@@ -100,9 +112,10 @@ export function OverviewTab({ data }: OverviewTabProps) {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4">
         <KPICard title="تعداد معاونت" value={formatNumber(departments)} icon={Building2} color="cyan" />
         <KPICard title="تعداد پرسنل" value={formatNumber(totalStaff)} icon={Users} color="pink" />
+        <KPICard title="میانگین سنی" value={formatNumber(avgAge)} icon={Calendar} color="orange" />
         <KPICard title="میانگین حقوق" value={formatNumber(avgSalary)} icon={Banknote} color="green" />
         <KPICard title="میانگین سابقه کاری" value={formatNumber(avgTenure)} icon={Clock} color="purple" />
       </div>
