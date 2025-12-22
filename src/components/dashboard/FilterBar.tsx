@@ -23,8 +23,8 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
   return (
     <div className="glass-card rounded-lg p-4 mb-6">
       <div className="flex flex-wrap gap-4 items-center justify-center">
-        <div className="flex flex-col gap-1 min-w-[140px]">
-          <label className="text-xs text-muted-foreground font-iransans">جنسیت</label>
+        <div className="flex flex-col gap-1.5 min-w-[140px]">
+          <label className="text-sm text-muted-foreground font-nazanin font-semibold">جنسیت</label>
           <Select
             value={filters.gender}
             onValueChange={(value) => onFilterChange('gender', value)}
@@ -41,8 +41,8 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1 min-w-[140px]">
-          <label className="text-xs text-muted-foreground font-iransans">تحصیلات</label>
+        <div className="flex flex-col gap-1.5 min-w-[140px]">
+          <label className="text-sm text-muted-foreground font-nazanin font-semibold">تحصیلات</label>
           <Select
             value={filters.education}
             onValueChange={(value) => onFilterChange('education', value)}
@@ -59,8 +59,8 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1 min-w-[140px]">
-          <label className="text-xs text-muted-foreground font-iransans">معاونت</label>
+        <div className="flex flex-col gap-1.5 min-w-[140px]">
+          <label className="text-sm text-muted-foreground font-nazanin font-semibold">معاونت</label>
           <Select
             value={filters.department}
             onValueChange={(value) => onFilterChange('department', value)}
@@ -77,8 +77,8 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1 min-w-[140px]">
-          <label className="text-xs text-muted-foreground font-iransans">محل فعالیت</label>
+        <div className="flex flex-col gap-1.5 min-w-[140px]">
+          <label className="text-sm text-muted-foreground font-nazanin font-semibold">محل فعالیت</label>
           <Select
             value={filters.location}
             onValueChange={(value) => onFilterChange('location', value)}
@@ -95,8 +95,8 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1 min-w-[140px]">
-          <label className="text-xs text-muted-foreground font-iransans">جایگاه سازمانی</label>
+        <div className="flex flex-col gap-1.5 min-w-[140px]">
+          <label className="text-sm text-muted-foreground font-nazanin font-semibold">جایگاه سازمانی</label>
           <Select
             value={filters.position}
             onValueChange={(value) => onFilterChange('position', value)}

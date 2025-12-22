@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Employee } from '@/types/employee';
 import { ChartCard } from './ChartCard';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
@@ -16,6 +17,8 @@ const persianMonths = [
 const COLORS = ['#f472b6', '#fb923c', '#facc15', '#a78bfa', '#2dd4bf', '#22c55e', '#f472b6', '#fb923c', '#facc15', '#a78bfa', '#2dd4bf', '#22c55e'];
 
 export function BirthdaysTab({ data }: BirthdaysTabProps) {
+  const [selectedMonth, setSelectedMonth] = useState<string | null>(null);
+
   // Count birthdays per month
   const monthCounts: Record<string, number> = {};
   persianMonths.forEach(m => monthCounts[m] = 0);
@@ -31,6 +34,11 @@ export function BirthdaysTab({ data }: BirthdaysTabProps) {
     color: COLORS[i],
   }));
 
+  // Filter employees based on selected month
+  const filteredEmployees = selectedMonth
+    ? data.filter(e => e.birthMonth === selectedMonth)
+    : data;
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
       {/* Month Selector & Chart */}
@@ -40,7 +48,12 @@ export function BirthdaysTab({ data }: BirthdaysTabProps) {
             {persianMonths.map((month) => (
               <button
                 key={month}
-                className="px-2 py-1.5 text-xs rounded bg-muted hover:bg-primary/20 transition-colors text-foreground"
+                onClick={() => setSelectedMonth(selectedMonth === month ? null : month)}
+                className={`px-2 py-1.5 text-xs rounded transition-colors font-nazanin ${
+                  selectedMonth === month
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted hover:bg-primary/20 text-foreground'
+                }`}
               >
                 {month}
               </button>
@@ -65,7 +78,7 @@ export function BirthdaysTab({ data }: BirthdaysTabProps) {
       </div>
 
       {/* Employee List */}
-      <ChartCard title="لیست پرسنل">
+      <ChartCard title={selectedMonth ? `لیست پرسنل متولد ${selectedMonth}` : 'لیست پرسنل'}>
         <ScrollArea className="h-[450px]">
           <Table>
             <TableHeader>
@@ -76,7 +89,7 @@ export function BirthdaysTab({ data }: BirthdaysTabProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map((employee) => (
+              {filteredEmployees.map((employee) => (
                 <TableRow key={employee.id} className="border-border hover:bg-muted/50">
                   <TableCell className="text-foreground">{employee.name}</TableCell>
                   <TableCell className="text-foreground">{employee.lastName}</TableCell>
