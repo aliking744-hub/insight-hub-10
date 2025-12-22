@@ -22,12 +22,16 @@ const COLORS = {
   blue: '#3b82f6',
 };
 
+// Current Persian year (approximate: 2024 = 1403)
+const CURRENT_PERSIAN_YEAR = 1403;
+
+// Convert Persian numerals to English
+const persianToEnglish = (str: string) => str.replace(/[۰-۹]/g, d => '0123456789'['۰۱۲۳۴۵۶۷۸۹'.indexOf(d)]);
+
 // Calculate age from Persian date (Jalali)
 function calculateAgeFromPersianDate(birthDate: string): number | null {
   if (!birthDate || birthDate.trim() === '') return null;
   
-  // Parse Persian date (format: 1370/01/15 or ۱۳۷۰/۰۱/۱۵)
-  const persianToEnglish = (str: string) => str.replace(/[۰-۹]/g, d => '0123456789'['۰۱۲۳۴۵۶۷۸۹'.indexOf(d)]);
   const normalizedDate = persianToEnglish(birthDate);
   const parts = normalizedDate.split('/');
   
@@ -36,18 +40,39 @@ function calculateAgeFromPersianDate(birthDate: string): number | null {
   const birthYear = parseInt(parts[0]);
   if (isNaN(birthYear) || birthYear < 1300 || birthYear > 1410) return null;
   
-  // Current Persian year (approximate: 2024 = 1403)
-  const currentPersianYear = 1403;
-  const age = currentPersianYear - birthYear;
+  const age = CURRENT_PERSIAN_YEAR - birthYear;
   
   return age > 0 && age < 100 ? age : null;
+}
+
+// Calculate tenure (years of service) from Persian hire date
+function calculateTenureFromPersianDate(hireDate: string): number | null {
+  if (!hireDate || hireDate.trim() === '') return null;
+  
+  const normalizedDate = persianToEnglish(hireDate);
+  const parts = normalizedDate.split('/');
+  
+  if (parts.length !== 3) return null;
+  
+  const hireYear = parseInt(parts[0]);
+  if (isNaN(hireYear) || hireYear < 1350 || hireYear > CURRENT_PERSIAN_YEAR) return null;
+  
+  const tenure = CURRENT_PERSIAN_YEAR - hireYear;
+  
+  return tenure >= 0 && tenure < 60 ? tenure : null;
 }
 
 export function OverviewTab({ data }: OverviewTabProps) {
   const totalStaff = data.length;
   const departments = [...new Set(data.map(e => e.department))].length;
   const avgSalary = Math.round(data.reduce((sum, e) => sum + e.salary, 0) / totalStaff);
-  const avgTenure = Math.round(data.reduce((sum, e) => sum + e.tenure, 0) / totalStaff);
+  
+  // Calculate average tenure from hire date
+  const tenures = data.map(e => calculateTenureFromPersianDate(e.employmentDate)).filter((t): t is number => t !== null);
+  const avgTenureNum = tenures.length > 0 
+    ? (tenures.reduce((sum, t) => sum + t, 0) / tenures.length).toFixed(2)
+    : '0';
+  const avgTenure = avgTenureNum.toString().replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[parseInt(d)]);
   
   // Calculate average age from birth date
   const ages = data.map(e => calculateAgeFromPersianDate(e.birthDate)).filter((age): age is number => age !== null);
@@ -133,7 +158,7 @@ export function OverviewTab({ data }: OverviewTabProps) {
         <KPICard title="تعداد پرسنل" value={formatNumber(totalStaff)} icon={Users} color="pink" />
         <KPICard title="میانگین سنی" value={String(avgAge)} icon={Calendar} color="orange" />
         <KPICard title="میانگین حقوق" value={formatNumber(avgSalary)} icon={Banknote} color="green" />
-        <KPICard title="میانگین سابقه کاری" value={formatNumber(avgTenure)} icon={Clock} color="purple" />
+        <KPICard title="میانگین سابقه کاری" value={avgTenure} icon={Clock} color="purple" />
       </div>
 
       {/* Charts Row 1 */}
