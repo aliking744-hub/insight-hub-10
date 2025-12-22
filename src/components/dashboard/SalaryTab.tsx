@@ -89,11 +89,11 @@ export function SalaryTab({ data }: SalaryTabProps) {
         <ChartCard title="مقایسه میانگین حقوق و تعداد پرسنل در هر معاونت" className="lg:col-span-1">
           <ResponsiveContainer width="100%" height={350}>
             <ComposedChart data={deptData}>
-              <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} angle={-30} textAnchor="end" height={70} />
-              <YAxis yAxisId="left" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-              <YAxis yAxisId="right" orientation="right" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+              <XAxis dataKey="name" tick={{ fill: 'hsl(var(--foreground))', fontSize: 11 }} angle={-30} textAnchor="end" height={70} />
+              <YAxis yAxisId="left" tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }} tickFormatter={(value) => formatSalary(value)} />
+              <YAxis yAxisId="right" orientation="right" tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }} />
               <Tooltip 
-                contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }}
+                contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: '8px' }}
                 formatter={(value: number, name: string) => [formatSalary(value), name === 'avgSalary' ? 'میانگین حقوق' : 'تعداد']}
               />
               <Bar yAxisId="left" dataKey="avgSalary" radius={[4, 4, 0, 0]}>
@@ -111,10 +111,10 @@ export function SalaryTab({ data }: SalaryTabProps) {
           <ChartCard title="میانگین حقوق به تفکیک جایگاه سازمانی">
             <ResponsiveContainer width="100%" height={160}>
               <BarChart data={posData}>
-                <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                <XAxis dataKey="name" tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }} />
+                <YAxis tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }} tickFormatter={(value) => formatSalary(value)} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }}
+                  contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: '8px' }}
                   formatter={(value: number) => [formatSalary(value), 'میانگین حقوق']}
                 />
                 <Bar dataKey="avgSalary" fill={COLORS.green} radius={[4, 4, 0, 0]} />
@@ -140,10 +140,10 @@ export function SalaryTab({ data }: SalaryTabProps) {
                   ))}
                 </Pie>
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }}
+                  contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: '8px' }}
                   formatter={(value: number) => [formatSalary(value), 'میانگین حقوق']}
                 />
-                <Legend />
+                <Legend wrapperStyle={{ fontSize: '14px' }} />
               </PieChart>
             </ResponsiveContainer>
           </ChartCard>
@@ -154,10 +154,10 @@ export function SalaryTab({ data }: SalaryTabProps) {
       <ChartCard title="میانگین حقوق به تفکیک مدرک تحصیلی">
         <ResponsiveContainer width="100%" height={200}>
           <BarChart data={eduData} layout="vertical">
-            <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-            <YAxis type="category" dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} width={100} />
+            <XAxis type="number" tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }} tickFormatter={(value) => formatSalary(value)} />
+            <YAxis type="category" dataKey="name" tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }} width={100} />
             <Tooltip 
-              contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }}
+              contentStyle={{ backgroundColor: 'hsl(var(--card))', border: '1px solid hsl(var(--border))', borderRadius: '8px' }}
               formatter={(value: number) => [formatSalary(value), 'میانگین حقوق']}
             />
             <Bar dataKey="avgSalary" radius={[0, 4, 4, 0]}>
