@@ -112,10 +112,10 @@ export function MapTab({ data }: MapTabProps) {
                   <button
                     key={region}
                     onClick={() => setSelectedRegion(regionNum)}
-                    className={`absolute flex items-center justify-center transition-all duration-200 rounded-md ${
+                    className={`absolute flex flex-col items-center justify-center transition-all duration-300 ease-out rounded-lg border-2 ${
                       isSelected 
-                        ? 'bg-primary/40 ring-2 ring-primary' 
-                        : 'hover:bg-primary/20'
+                        ? 'bg-primary/50 border-primary scale-110 shadow-lg shadow-primary/30 z-10' 
+                        : 'bg-background/60 border-border/50 hover:bg-primary/30 hover:border-primary/70 hover:scale-105 hover:shadow-md hover:z-10'
                     }`}
                     style={{
                       left: `${area.x}%`,
@@ -125,12 +125,19 @@ export function MapTab({ data }: MapTabProps) {
                     }}
                     title={`منطقه ${formatNumber(regionNum)} - ${formatNumber(count)} نفر`}
                   >
-                    <span className={`font-iransans text-xs font-bold px-1 py-0.5 rounded ${
+                    <span className={`font-iransans text-sm font-bold transition-all duration-200 ${
                       isSelected 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-background/80 text-foreground'
+                        ? 'text-primary-foreground' 
+                        : 'text-foreground'
                     }`}>
-                      {formatNumber(count)}
+                      {formatNumber(regionNum)}
+                    </span>
+                    <span className={`font-nazanin text-xs mt-0.5 transition-all duration-200 ${
+                      isSelected 
+                        ? 'text-primary-foreground/90' 
+                        : 'text-muted-foreground'
+                    }`}>
+                      ({formatNumber(count)})
                     </span>
                   </button>
                 );
