@@ -6,6 +6,8 @@ import * as XLSX from 'xlsx';
 import { Employee } from '@/types/employee';
 import { parseExcelData, generateSampleData } from '@/utils/sampleData';
 import logoGlow from '@/assets/logo-glow.png';
+import { ThemeToggle } from '@/components/ThemeToggle';
+
 interface UploadPageProps {
   onDataLoaded: (data: Employee[]) => void;
 }
@@ -131,7 +133,12 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 transition-colors duration-300">
+      {/* Theme Toggle - Fixed position */}
+      <div className="fixed top-4 left-4 z-50">
+        <ThemeToggle />
+      </div>
+      
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-8">
@@ -139,13 +146,13 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
             <img 
               src={logoGlow} 
               alt="hring logo" 
-              className="h-20 md:h-24 w-auto animate-pulse-glow"
+              className="h-16 md:h-20 w-auto animate-pulse-glow"
             />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold gradient-text mb-3">
+          <h1 className="text-2xl md:text-4xl font-bold gradient-text mb-3">
             داشبورد منابع انسانی
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground text-sm md:text-base">
             فایل اکسل خود را آپلود کنید تا داشبورد تحلیلی خود را مشاهده کنید
           </p>
         </div>

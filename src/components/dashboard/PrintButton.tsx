@@ -13,6 +13,10 @@ export function PrintButton({ title = 'گزارش داشبورد منابع ان
     printStyle.id = 'print-styles';
     printStyle.innerHTML = `
       @media print {
+        @page {
+          size: A4 landscape;
+          margin: 10mm;
+        }
         body * {
           visibility: hidden;
         }
@@ -28,39 +32,64 @@ export function PrintButton({ title = 'گزارش داشبورد منابع ان
         }
         .print-header {
           display: flex !important;
-          flex-direction: row-reverse;
           align-items: center;
-          justify-content: flex-start;
-          gap: 16px;
-          padding: 20px;
+          justify-content: flex-end;
+          gap: 12px;
+          padding: 10px 20px;
           border-bottom: 2px solid #1e3a5f;
-          margin-bottom: 20px;
+          margin-bottom: 15px;
           width: 100%;
         }
         .print-header img {
-          height: 60px;
-          width: auto;
+          height: 40px;
+          width: 40px;
+          object-fit: contain;
         }
         .print-header h1 {
-          font-size: 24px;
+          font-size: 18px;
           color: #1e3a5f;
-          flex-grow: 1;
-          text-align: right;
+          margin: 0;
         }
         .no-print {
           display: none !important;
         }
-        .recharts-wrapper,
+        .recharts-wrapper {
+          width: 100% !important;
+          max-width: 100% !important;
+        }
         .recharts-surface {
           width: 100% !important;
-          height: auto !important;
         }
         .grid {
-          display: block !important;
+          display: grid !important;
+          grid-template-columns: 1fr 1fr !important;
+          gap: 15px !important;
         }
         .grid > div {
-          margin-bottom: 20px;
           page-break-inside: avoid;
+          break-inside: avoid;
+        }
+        .lg\\:grid-cols-2 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .space-y-6 > * + * {
+          margin-top: 15px !important;
+        }
+        .glass-card, [class*="card"] {
+          background: white !important;
+          border: 1px solid #ddd !important;
+          box-shadow: none !important;
+          padding: 10px !important;
+        }
+        h3, h4, p, span, text {
+          color: #333 !important;
+          fill: #333 !important;
+        }
+        .recharts-cartesian-axis-tick-value {
+          fill: #333 !important;
+        }
+        svg text {
+          fill: #333 !important;
         }
       }
     `;
@@ -79,8 +108,8 @@ export function PrintButton({ title = 'گزارش داشبورد منابع ان
     <>
       {/* Print Header - hidden until print */}
       <div className="print-header hidden">
-        <img src={logoIcon} alt="hring logo" />
         <h1>{title}</h1>
+        <img src={logoIcon} alt="hring logo" />
       </div>
       
       <Button 

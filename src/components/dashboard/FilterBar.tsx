@@ -21,15 +21,15 @@ interface FilterBarProps {
 
 export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) {
   return (
-    <div className="glass-card rounded-lg p-4 mb-6">
-      <div className="flex flex-wrap gap-4 items-center justify-center">
-        <div className="flex flex-col gap-1.5 min-w-[140px]">
-          <label className="text-sm text-muted-foreground font-nazanin font-semibold">جنسیت</label>
+    <div className="glass-card rounded-lg p-3 md:p-4 mb-4 md:mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 md:gap-4">
+        <div className="flex flex-col gap-1">
+          <label className="text-xs md:text-sm text-muted-foreground font-nazanin font-semibold">جنسیت</label>
           <Select
             value={filters.gender}
             onValueChange={(value) => onFilterChange('gender', value)}
           >
-            <SelectTrigger className="bg-muted border-border">
+            <SelectTrigger className="bg-muted border-border h-8 md:h-10 text-xs md:text-sm">
               <SelectValue placeholder="All" />
             </SelectTrigger>
             <SelectContent>
@@ -41,13 +41,13 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1.5 min-w-[140px]">
-          <label className="text-sm text-muted-foreground font-nazanin font-semibold">تحصیلات</label>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs md:text-sm text-muted-foreground font-nazanin font-semibold">تحصیلات</label>
           <Select
             value={filters.education}
             onValueChange={(value) => onFilterChange('education', value)}
           >
-            <SelectTrigger className="bg-muted border-border">
+            <SelectTrigger className="bg-muted border-border h-8 md:h-10 text-xs md:text-sm">
               <SelectValue placeholder="All" />
             </SelectTrigger>
             <SelectContent>
@@ -59,13 +59,13 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1.5 min-w-[140px]">
-          <label className="text-sm text-muted-foreground font-nazanin font-semibold">معاونت</label>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs md:text-sm text-muted-foreground font-nazanin font-semibold">معاونت</label>
           <Select
             value={filters.department}
             onValueChange={(value) => onFilterChange('department', value)}
           >
-            <SelectTrigger className="bg-muted border-border">
+            <SelectTrigger className="bg-muted border-border h-8 md:h-10 text-xs md:text-sm">
               <SelectValue placeholder="All" />
             </SelectTrigger>
             <SelectContent>
@@ -77,13 +77,13 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1.5 min-w-[140px]">
-          <label className="text-sm text-muted-foreground font-nazanin font-semibold">محل فعالیت</label>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs md:text-sm text-muted-foreground font-nazanin font-semibold">محل فعالیت</label>
           <Select
             value={filters.location}
             onValueChange={(value) => onFilterChange('location', value)}
           >
-            <SelectTrigger className="bg-muted border-border">
+            <SelectTrigger className="bg-muted border-border h-8 md:h-10 text-xs md:text-sm">
               <SelectValue placeholder="All" />
             </SelectTrigger>
             <SelectContent>
@@ -95,13 +95,13 @@ export function FilterBar({ filters, onFilterChange, options }: FilterBarProps) 
           </Select>
         </div>
 
-        <div className="flex flex-col gap-1.5 min-w-[140px]">
-          <label className="text-sm text-muted-foreground font-nazanin font-semibold">جایگاه سازمانی</label>
+        <div className="flex flex-col gap-1 col-span-2 sm:col-span-1">
+          <label className="text-xs md:text-sm text-muted-foreground font-nazanin font-semibold">جایگاه سازمانی</label>
           <Select
             value={filters.position}
             onValueChange={(value) => onFilterChange('position', value)}
           >
-            <SelectTrigger className="bg-muted border-border">
+            <SelectTrigger className="bg-muted border-border h-8 md:h-10 text-xs md:text-sm">
               <SelectValue placeholder="All" />
             </SelectTrigger>
             <SelectContent>
