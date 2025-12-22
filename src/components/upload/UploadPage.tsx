@@ -6,7 +6,9 @@ import * as XLSX from 'xlsx';
 import { Employee } from '@/types/employee';
 import { parseExcelData, generateSampleData } from '@/utils/sampleData';
 import logoGlow from '@/assets/logo-glow.png';
+import logoDark from '@/assets/logo-dark.png';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { useTheme } from '@/hooks/useTheme';
 
 interface UploadPageProps {
   onDataLoaded: (data: Employee[]) => void;
@@ -15,6 +17,7 @@ interface UploadPageProps {
 export function UploadPage({ onDataLoaded }: UploadPageProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { theme } = useTheme();
 
   const handleFile = useCallback(async (file: File) => {
     if (!file.name.endsWith('.xlsx') && !file.name.endsWith('.xls')) {
@@ -144,9 +147,9 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center mb-6">
             <img 
-              src={logoGlow} 
+              src={theme === 'light' ? logoDark : logoGlow} 
               alt="hring logo" 
-              className="h-16 md:h-20 w-auto animate-pulse-glow"
+              className={`h-16 md:h-20 w-auto ${theme === 'dark' ? 'animate-pulse-glow' : ''}`}
             />
           </div>
           <h1 className="text-2xl md:text-4xl font-bold gradient-text mb-3">
