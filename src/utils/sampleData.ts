@@ -46,6 +46,7 @@ export function generateSampleData(count: number = 78): Employee[] {
     
     employees.push({
       id: `emp-${i + 1}`,
+      personnelCode: `${10001 + i}`,
       name: firstName,
       lastName: lastName,
       fullName: `${firstName} ${lastName}`,
@@ -83,12 +84,18 @@ export function generateSampleData(count: number = 78): Employee[] {
 }
 
 export function parseExcelData(data: any[]): Employee[] {
-  return data.map((row, index) => ({
-    id: `emp-${index + 1}`,
-    name: row['نام'] || row['name'] || '',
-    lastName: row['نام خانوادگی'] || row['lastName'] || '',
-    fullName: row['نام و نام خانوادگی'] || `${row['نام'] || ''} ${row['نام خانوادگی'] || ''}`,
-    gender: row['جنسیت'] || row['gender'] || 'مرد',
+  return data.map((row, index) => {
+    const name = row['نام'] || row['name'] || undefined;
+    const lastName = row['نام خانوادگی'] || row['lastName'] || undefined;
+    const fullName = (name && lastName) ? `${name} ${lastName}` : undefined;
+    
+    return {
+      id: `emp-${index + 1}`,
+      personnelCode: String(row['کد پرسنلی'] || row['personnelCode'] || `${10001 + index}`),
+      name,
+      lastName,
+      fullName,
+      gender: row['جنسیت'] || row['gender'] || 'مرد',
     birthDate: row['تاریخ تولد'] || row['birthDate'] || '',
     birthMonth: row['ماه تولد'] || row['birthMonth'] || '',
     education: row['مدرک تحصیلی'] || row['education'] || '',
@@ -113,7 +120,8 @@ export function parseExcelData(data: any[]): Employee[] {
     knowledgeScore: parseFloat(row['دانش و تخصص'] || '0'),
     behaviorScore: parseFloat(row['تعامل و رفتار'] || '0'),
     responsibilityScore: parseFloat(row['مسئولیت و وفاداری'] || '0'),
-    ageGroup: row['رده سنی'] || row['ageGroup'] || '',
-    tenure: parseInt(row['سابقه'] || row['tenure'] || '0'),
-  }));
+      ageGroup: row['رده سنی'] || row['ageGroup'] || '',
+      tenure: parseInt(row['سابقه'] || row['tenure'] || '0'),
+    };
+  });
 }

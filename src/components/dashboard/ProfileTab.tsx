@@ -129,20 +129,28 @@ export function ProfileTab({ data }: ProfileTabProps) {
             </SelectTrigger>
             <SelectContent>
               {data.map((emp) => (
-                <SelectItem key={emp.id} value={emp.id} className="text-right">{emp.fullName}</SelectItem>
+                <SelectItem key={emp.id} value={emp.id} className="text-right">
+                  {emp.personnelCode}{emp.fullName ? ` - ${emp.fullName}` : ''}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>
-          <label className="text-sm text-muted-foreground">:نام و نام خانوادگی</label>
+          <label className="text-sm text-muted-foreground">:کد پرسنلی</label>
         </div>
       </div>
 
       {/* Profile Info Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="glass-card rounded-lg p-4 text-center border border-chart-cyan/30">
-          <div className="text-xs text-muted-foreground mb-1">نام و نام خانوادگی</div>
-          <div className="text-lg font-bold text-chart-pink">{selectedEmployee.fullName}</div>
+          <div className="text-xs text-muted-foreground mb-1">کد پرسنلی</div>
+          <div className="text-lg font-bold text-chart-pink">{selectedEmployee.personnelCode}</div>
         </div>
+        {selectedEmployee.fullName && (
+          <div className="glass-card rounded-lg p-4 text-center border border-chart-purple/30">
+            <div className="text-xs text-muted-foreground mb-1">نام و نام خانوادگی</div>
+            <div className="text-lg font-bold text-chart-purple">{selectedEmployee.fullName}</div>
+          </div>
+        )}
         <div className="glass-card rounded-lg p-4 text-center">
           <div className="text-xs text-muted-foreground mb-1">تاریخ تولد</div>
           <div className="text-lg font-bold text-foreground">{selectedEmployee.birthDate}</div>
