@@ -1,11 +1,11 @@
 import { useState, useCallback } from 'react';
-import { Upload, FileSpreadsheet, ChevronLeft, Sparkles, Database, Download } from 'lucide-react';
+import { Upload, FileSpreadsheet, ChevronLeft, Sparkles, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import * as XLSX from 'xlsx';
 import { Employee } from '@/types/employee';
 import { parseExcelData, generateSampleData } from '@/utils/sampleData';
-
+import logoWhite from '@/assets/logo-white.png';
 interface UploadPageProps {
   onDataLoaded: (data: Employee[]) => void;
 }
@@ -135,8 +135,12 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-primary/20 mb-6 animate-pulse-glow">
-            <Database className="w-10 h-10 text-primary" />
+          <div className="inline-flex items-center justify-center mb-6">
+            <img 
+              src={logoWhite} 
+              alt="hring logo" 
+              className="h-24 md:h-28 w-auto animate-pulse-glow rounded-2xl"
+            />
           </div>
           <h1 className="text-3xl md:text-4xl font-bold gradient-text mb-3">
             داشبورد منابع انسانی
