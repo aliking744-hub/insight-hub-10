@@ -2,7 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+/* Persian Fonts */
+@font-face {
+  font-family: 'Afarin';
+  src: url('/fonts/Afarin-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IRANSans';
+  src: url('/fonts/IRANSansBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BNazanin';
+  src: url('/fonts/BNazanin.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 @layer base {
   :root {
@@ -76,8 +99,22 @@
   }
 
   body {
-    @apply bg-background text-foreground font-vazir;
+    @apply bg-background text-foreground font-nazanin;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .font-afarin {
+    font-family: 'Afarin', sans-serif;
+  }
+
+  .font-iransans {
+    font-family: 'IRANSans', sans-serif;
+  }
+
+  .font-nazanin {
+    font-family: 'BNazanin', serif;
   }
 }
 

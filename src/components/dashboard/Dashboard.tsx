@@ -66,10 +66,10 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold gradient-text">داشبورد منابع انسانی</h1>
-          <p className="text-muted-foreground text-sm mt-1">تحلیل و گزارش‌گیری اطلاعات پرسنلی</p>
+          <h1 className="text-2xl md:text-3xl font-afarin gradient-text">داشبورد منابع انسانی</h1>
+          <p className="text-muted-foreground text-sm mt-1 font-nazanin">تحلیل و گزارش‌گیری اطلاعات پرسنلی</p>
         </div>
-        <Button variant="outline" onClick={onLogout} className="gap-2">
+        <Button variant="outline" onClick={onLogout} className="gap-2 font-iransans">
           <LogOut className="w-4 h-4" />
           خروج
         </Button>
@@ -89,7 +89,7 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
             <TabsTrigger
               key={tab.id}
               value={tab.id}
-              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground gap-2 px-4 py-2"
+              className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground gap-2 px-4 py-2 font-iransans"
             >
               <tab.icon className="w-4 h-4" />
               <span className="hidden sm:inline">{tab.label}</span>

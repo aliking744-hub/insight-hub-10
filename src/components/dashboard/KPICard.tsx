@@ -33,8 +33,8 @@ export function KPICard({ title, value, icon: Icon, color }: KPICardProps) {
           <Icon className="w-6 h-6 text-background" />
         </div>
         <div className="flex flex-col">
-          <span className="text-sm text-muted-foreground">{title}</span>
-          <span className="text-2xl font-bold text-foreground">{value}</span>
+          <span className="text-sm text-muted-foreground font-nazanin">{title}</span>
+          <span className="text-2xl font-afarin text-foreground">{value}</span>
         </div>
       </div>
     </div>
