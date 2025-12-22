@@ -1,5 +1,6 @@
 import { Employee } from '@/types/employee';
 import { ChartCard } from './ChartCard';
+import { PrintButton } from './PrintButton';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LineChart, Line } from 'recharts';
 import { useState } from 'react';
@@ -113,7 +114,12 @@ export function ProfileTab({ data }: ProfileTabProps) {
   const formatNumber = (num: number) => new Intl.NumberFormat('fa-IR').format(num);
 
   return (
-    <div className="space-y-6" dir="rtl">
+    <div className="space-y-6 print-area" dir="rtl">
+      {/* Print Button */}
+      <div className="flex justify-start">
+        <PrintButton title="گزارش پروفایل کارمند" />
+      </div>
+
       {/* Employee Selector */}
       <div className="glass-card rounded-lg p-4">
         <div className="flex items-center gap-4 justify-end">

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Employee } from '@/types/employee';
 import { ChartCard } from './ChartCard';
+import { PrintButton } from './PrintButton';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Users } from 'lucide-react';
@@ -53,7 +54,13 @@ export function MapTab({ data }: MapTabProps) {
   const formatNumber = (num: number) => new Intl.NumberFormat('fa-IR').format(num);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" dir="rtl">
+    <div className="space-y-4 print-area">
+      {/* Print Button */}
+      <div className="flex justify-end">
+        <PrintButton title="گزارش نقشه مناطق" />
+      </div>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6" dir="rtl">
       {/* Employee List - Now on the right in RTL */}
       <ChartCard title={selectedRegion ? `لیست پرسنل منطقه ${formatNumber(selectedRegion)}` : "لیست تمام پرسنل"}>
         <div className="flex items-center justify-between mb-3">
@@ -151,6 +158,7 @@ export function MapTab({ data }: MapTabProps) {
           </div>
         </div>
       </ChartCard>
+      </div>
     </div>
   );
 }

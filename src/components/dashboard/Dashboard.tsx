@@ -10,7 +10,7 @@ import { OvertimeTab } from './OvertimeTab';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { LogOut, LayoutDashboard, Cake, Banknote, MapPin, User, Clock } from 'lucide-react';
-
+import logoFull from '@/assets/logo-full.png';
 interface DashboardProps {
   data: Employee[];
   onLogout: () => void;
@@ -65,9 +65,16 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
     <div className="min-h-screen bg-background p-4 md:p-6">
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-afarin gradient-text">داشبورد منابع انسانی</h1>
-          <p className="text-muted-foreground text-sm mt-1 font-nazanin">تحلیل و گزارش‌گیری اطلاعات پرسنلی</p>
+        <div className="flex items-center gap-4">
+          <img 
+            src={logoFull} 
+            alt="hring logo" 
+            className="h-12 md:h-14 w-auto animate-pulse-glow rounded-lg"
+          />
+          <div>
+            <h1 className="text-2xl md:text-3xl font-afarin gradient-text">داشبورد منابع انسانی</h1>
+            <p className="text-muted-foreground text-sm mt-1 font-nazanin">تحلیل و گزارش‌گیری اطلاعات پرسنلی</p>
+          </div>
         </div>
         <Button variant="outline" onClick={onLogout} className="gap-2 font-iransans">
           <LogOut className="w-4 h-4" />

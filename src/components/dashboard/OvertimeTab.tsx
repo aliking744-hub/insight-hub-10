@@ -1,5 +1,6 @@
 import { Employee } from '@/types/employee';
 import { ChartCard } from './ChartCard';
+import { PrintButton } from './PrintButton';
 import {
   ComposedChart, Bar, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, Legend
 } from 'recharts';
@@ -51,7 +52,12 @@ export function OvertimeTab({ data }: OvertimeTabProps) {
   const formatNumber = (num: number) => new Intl.NumberFormat('fa-IR').format(num);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 print-area">
+      {/* Print Button */}
+      <div className="flex justify-end">
+        <PrintButton title="گزارش اضافه کار" />
+      </div>
+
       {/* Monthly Chart */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <ChartCard title="تعداد نفرات شاغل و حقوق پرداختی">
