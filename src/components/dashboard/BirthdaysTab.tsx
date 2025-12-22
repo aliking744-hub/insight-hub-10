@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Employee } from '@/types/employee';
 import { ChartCard } from './ChartCard';
+import { PrintButton } from './PrintButton';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -40,9 +41,15 @@ export function BirthdaysTab({ data }: BirthdaysTabProps) {
     : data;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      {/* Month Selector & Chart */}
-      <div className="space-y-4">
+    <div className="space-y-4 print-area">
+      {/* Print Button */}
+      <div className="flex justify-end">
+        <PrintButton title="گزارش تولدها" />
+      </div>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Month Selector & Chart */}
+        <div className="space-y-4">
         <ChartCard title="ماه تولد">
           <div className="grid grid-cols-6 gap-2 mb-4">
             {persianMonths.map((month) => (
@@ -100,6 +107,7 @@ export function BirthdaysTab({ data }: BirthdaysTabProps) {
           </Table>
         </ScrollArea>
       </ChartCard>
+      </div>
     </div>
   );
 }

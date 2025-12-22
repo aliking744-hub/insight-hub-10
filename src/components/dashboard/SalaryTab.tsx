@@ -1,5 +1,6 @@
 import { Employee } from '@/types/employee';
 import { ChartCard } from './ChartCard';
+import { PrintButton } from './PrintButton';
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, PieChart, Pie, Legend, ComposedChart, Line
 } from 'recharts';
@@ -83,7 +84,12 @@ export function SalaryTab({ data }: SalaryTabProps) {
   const barColors = [COLORS.pink, COLORS.cyan, COLORS.purple, COLORS.orange, COLORS.yellow, COLORS.green];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 print-area">
+      {/* Print Button */}
+      <div className="flex justify-end">
+        <PrintButton title="گزارش حقوق" />
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Department comparison */}
         <ChartCard title="مقایسه میانگین حقوق و تعداد پرسنل در هر معاونت" className="lg:col-span-1">

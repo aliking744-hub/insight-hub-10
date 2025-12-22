@@ -1,6 +1,7 @@
 import { Employee } from '@/types/employee';
 import { KPICard } from './KPICard';
 import { ChartCard } from './ChartCard';
+import { PrintButton } from './PrintButton';
 import { Users, Building2, Banknote, Clock } from 'lucide-react';
 import {
   PieChart, Pie, Cell, ResponsiveContainer,
@@ -92,7 +93,12 @@ export function OverviewTab({ data }: OverviewTabProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 print-area">
+      {/* Print Button */}
+      <div className="flex justify-end">
+        <PrintButton title="گزارش نمای کلی" />
+      </div>
+
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KPICard title="تعداد معاونت" value={formatNumber(departments)} icon={Building2} color="cyan" />
