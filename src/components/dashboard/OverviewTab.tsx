@@ -93,14 +93,14 @@ export function OverviewTab({ data }: OverviewTabProps) {
   };
 
   return (
-    <div className="space-y-6 print-area">
+    <div className="space-y-4 md:space-y-6 print-area">
       {/* Print Button */}
       <div className="flex justify-end">
         <PrintButton title="گزارش نمای کلی" />
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
         <KPICard title="تعداد معاونت" value={formatNumber(departments)} icon={Building2} color="cyan" />
         <KPICard title="تعداد پرسنل" value={formatNumber(totalStaff)} icon={Users} color="pink" />
         <KPICard title="میانگین حقوق" value={formatNumber(avgSalary)} icon={Banknote} color="green" />
@@ -108,9 +108,9 @@ export function OverviewTab({ data }: OverviewTabProps) {
       </div>
 
       {/* Charts Row 1 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <ChartCard title="تعداد پرسنل براساس رده سنی">
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={180}>
             <AreaChart data={ageData}>
               <defs>
                 <linearGradient id="colorAge" x1="0" y1="0" x2="0" y2="1">
@@ -118,8 +118,8 @@ export function OverviewTab({ data }: OverviewTabProps) {
                   <stop offset="95%" stopColor={COLORS.cyan} stopOpacity={0.1}/>
                 </linearGradient>
               </defs>
-              <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} />
+              <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} />
+              <YAxis tick={{ fill: '#94a3b8', fontSize: 9 }} width={25} />
               <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }} />
               <Area type="monotone" dataKey="value" stroke={COLORS.cyan} fillOpacity={1} fill="url(#colorAge)" />
             </AreaChart>
@@ -127,14 +127,14 @@ export function OverviewTab({ data }: OverviewTabProps) {
         </ChartCard>
 
         <ChartCard title="پرسنل به تفکیک جنسیت">
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={180}>
             <PieChart>
               <Pie
                 data={genderData}
                 cx="50%"
                 cy="50%"
-                innerRadius={50}
-                outerRadius={70}
+                innerRadius={40}
+                outerRadius={60}
                 dataKey="value"
                 label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
                 labelLine={false}
@@ -149,14 +149,14 @@ export function OverviewTab({ data }: OverviewTabProps) {
         </ChartCard>
 
         <ChartCard title="وضعیت تاهل">
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={180}>
             <PieChart>
               <Pie
                 data={maritalData}
                 cx="50%"
                 cy="50%"
-                innerRadius={50}
-                outerRadius={70}
+                innerRadius={40}
+                outerRadius={60}
                 dataKey="value"
                 label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
                 labelLine={false}
@@ -171,14 +171,14 @@ export function OverviewTab({ data }: OverviewTabProps) {
         </ChartCard>
 
         <ChartCard title="محل فعالیت">
-          <ResponsiveContainer width="100%" height={200}>
+          <ResponsiveContainer width="100%" height={180}>
             <PieChart>
               <Pie
                 data={locationData}
                 cx="50%"
                 cy="50%"
-                innerRadius={50}
-                outerRadius={70}
+                innerRadius={40}
+                outerRadius={60}
                 dataKey="value"
                 label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
                 labelLine={false}
@@ -194,16 +194,16 @@ export function OverviewTab({ data }: OverviewTabProps) {
       </div>
 
       {/* Charts Row 2 */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
         <ChartCard title="مدرک تحصیلی">
-          <ResponsiveContainer width="100%" height={280}>
+          <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie
                 data={educationData}
                 cx="50%"
                 cy="40%"
-                innerRadius={50}
-                outerRadius={80}
+                innerRadius={40}
+                outerRadius={65}
                 dataKey="value"
                 label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
                 labelLine={false}
@@ -213,16 +213,16 @@ export function OverviewTab({ data }: OverviewTabProps) {
                 ))}
               </Pie>
               <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }} />
-              <Legend wrapperStyle={{ paddingTop: '20px' }} />
+              <Legend wrapperStyle={{ paddingTop: '10px', fontSize: '10px' }} />
             </PieChart>
           </ResponsiveContainer>
         </ChartCard>
 
         <ChartCard title="توزیع پرسنل در معاونت ها">
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height={220}>
             <BarChart data={deptData} layout="vertical">
-              <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-              <YAxis type="category" dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} width={80} />
+              <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 9 }} />
+              <YAxis type="category" dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} width={70} />
               <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }} />
               <Bar dataKey="value" fill={COLORS.purple} radius={[0, 4, 4, 0]} />
             </BarChart>
@@ -230,10 +230,10 @@ export function OverviewTab({ data }: OverviewTabProps) {
         </ChartCard>
 
         <ChartCard title="پرسنل به تفکیک جایگاه شغلی">
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height={220}>
             <BarChart data={posData} layout="vertical">
-              <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-              <YAxis type="category" dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} width={60} />
+              <XAxis type="number" tick={{ fill: '#94a3b8', fontSize: 9 }} />
+              <YAxis type="category" dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} width={50} />
               <Tooltip contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }} />
               <Bar dataKey="value" fill={COLORS.pink} radius={[0, 4, 4, 0]} />
             </BarChart>

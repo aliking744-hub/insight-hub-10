@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { LogOut, LayoutDashboard, Cake, Banknote, MapPin, User, Clock } from 'lucide-react';
 import logoGlow from '@/assets/logo-glow.png';
+import { ThemeToggle } from '@/components/ThemeToggle';
 interface DashboardProps {
   data: Employee[];
   onLogout: () => void;
@@ -62,24 +63,27 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
   ];
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-6">
+    <div className="min-h-screen bg-background p-3 md:p-6 transition-colors duration-300">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 md:mb-6">
+        <div className="flex items-center gap-3">
           <img 
             src={logoGlow} 
             alt="hring logo" 
-            className="h-10 md:h-12 w-auto animate-pulse-glow"
+            className="h-8 md:h-12 w-auto animate-pulse-glow"
           />
           <div>
-            <h1 className="text-2xl md:text-3xl font-afarin gradient-text">داشبورد منابع انسانی</h1>
-            <p className="text-muted-foreground text-sm mt-1 font-nazanin">تحلیل و گزارش‌گیری اطلاعات پرسنلی</p>
+            <h1 className="text-xl md:text-3xl font-afarin gradient-text">داشبورد منابع انسانی</h1>
+            <p className="text-muted-foreground text-xs md:text-sm mt-1 font-nazanin hidden sm:block">تحلیل و گزارش‌گیری اطلاعات پرسنلی</p>
           </div>
         </div>
-        <Button variant="outline" onClick={onLogout} className="gap-2 font-iransans">
-          <LogOut className="w-4 h-4" />
-          خروج
-        </Button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <Button variant="outline" onClick={onLogout} className="gap-2 font-iransans text-sm">
+            <LogOut className="w-4 h-4" />
+            <span className="hidden sm:inline">خروج</span>
+          </Button>
+        </div>
       </div>
 
       {/* Filter Bar */}

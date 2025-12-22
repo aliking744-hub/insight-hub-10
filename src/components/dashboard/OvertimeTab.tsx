@@ -52,20 +52,20 @@ export function OvertimeTab({ data }: OvertimeTabProps) {
   const formatNumber = (num: number) => new Intl.NumberFormat('fa-IR').format(num);
 
   return (
-    <div className="space-y-6 print-area">
+    <div className="space-y-4 md:space-y-6 print-area">
       {/* Print Button */}
       <div className="flex justify-end">
         <PrintButton title="گزارش اضافه کار" />
       </div>
 
       {/* Monthly Chart */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         <ChartCard title="تعداد نفرات شاغل و حقوق پرداختی">
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <ComposedChart data={monthlyData}>
-              <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 12 }} />
-              <YAxis yAxisId="left" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-              <YAxis yAxisId="right" orientation="right" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+              <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+              <YAxis yAxisId="left" tick={{ fill: '#94a3b8', fontSize: 9 }} width={40} />
+              <YAxis yAxisId="right" orientation="right" tick={{ fill: '#94a3b8', fontSize: 9 }} width={40} />
               <Tooltip 
                 contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }}
                 formatter={(value: number, name: string) => [
@@ -73,7 +73,7 @@ export function OvertimeTab({ data }: OvertimeTabProps) {
                   name === 'staff' ? 'تعداد نفرات' : 'حقوق (میلیون)'
                 ]}
               />
-              <Legend />
+              <Legend wrapperStyle={{ fontSize: '10px' }} />
               <Bar yAxisId="left" dataKey="salary" name="حقوق پرداختی" radius={[4, 4, 0, 0]}>
                 {monthlyData.map((_, index) => (
                   <Cell 
@@ -89,17 +89,17 @@ export function OvertimeTab({ data }: OvertimeTabProps) {
                 name="تعداد نفرات" 
                 stroke={COLORS.green} 
                 strokeWidth={2} 
-                dot={{ fill: COLORS.green, r: 6 }} 
+                dot={{ fill: COLORS.green, r: 4 }} 
               />
             </ComposedChart>
           </ResponsiveContainer>
         </ChartCard>
 
         <ChartCard title="مجموع اضافه کار پرداختی ماهانه">
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <ComposedChart data={monthlyData}>
-              <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 12 }} />
-              <YAxis tick={{ fill: '#94a3b8', fontSize: 10 }} />
+              <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+              <YAxis tick={{ fill: '#94a3b8', fontSize: 9 }} width={40} />
               <Tooltip 
                 contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }}
               />
@@ -109,7 +109,7 @@ export function OvertimeTab({ data }: OvertimeTabProps) {
                 stroke={COLORS.cyan} 
                 strokeWidth={3} 
                 strokeDasharray="5 5"
-                dot={{ fill: COLORS.cyan, r: 8, stroke: COLORS.cyan, strokeWidth: 2 }}
+                dot={{ fill: COLORS.cyan, r: 6, stroke: COLORS.cyan, strokeWidth: 2 }}
               />
             </ComposedChart>
           </ResponsiveContainer>
@@ -118,11 +118,11 @@ export function OvertimeTab({ data }: OvertimeTabProps) {
 
       {/* Department Comparison */}
       <ChartCard title="مقایسه میانگین خالص پرداختی و تعداد پرسنل در هر معاونت">
-        <ResponsiveContainer width="100%" height={350}>
+        <ResponsiveContainer width="100%" height={280}>
           <ComposedChart data={deptData}>
-            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 10 }} angle={-30} textAnchor="end" height={70} />
-            <YAxis yAxisId="left" tick={{ fill: '#94a3b8', fontSize: 10 }} />
-            <YAxis yAxisId="right" orientation="right" tick={{ fill: '#94a3b8', fontSize: 10 }} />
+            <XAxis dataKey="name" tick={{ fill: '#94a3b8', fontSize: 9 }} angle={-30} textAnchor="end" height={60} />
+            <YAxis yAxisId="left" tick={{ fill: '#94a3b8', fontSize: 9 }} width={50} />
+            <YAxis yAxisId="right" orientation="right" tick={{ fill: '#94a3b8', fontSize: 9 }} width={40} />
             <Tooltip 
               contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px' }}
               formatter={(value: number, name: string) => [
@@ -131,7 +131,7 @@ export function OvertimeTab({ data }: OvertimeTabProps) {
                 name === 'contractSalary' ? 'میانگین حقوق قراردادی' : 'تعداد کارستان'
               ]}
             />
-            <Legend />
+            <Legend wrapperStyle={{ fontSize: '10px' }} />
             <Bar yAxisId="left" dataKey="avgOvertimeSalary" name="میانگین حقوق پرداختی" fill={COLORS.pink} radius={[4, 4, 0, 0]} />
             <Bar yAxisId="left" dataKey="contractSalary" name="میانگین حقوق قراردادی" fill={COLORS.cyan} radius={[4, 4, 0, 0]} />
             <Line 
@@ -141,7 +141,7 @@ export function OvertimeTab({ data }: OvertimeTabProps) {
               name="تعداد کارستان" 
               stroke={COLORS.purple} 
               strokeWidth={2} 
-              dot={{ fill: COLORS.purple, r: 6 }} 
+              dot={{ fill: COLORS.purple, r: 4 }} 
             />
           </ComposedChart>
         </ResponsiveContainer>
