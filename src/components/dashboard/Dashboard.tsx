@@ -10,7 +10,7 @@ import { OvertimeTab } from './OvertimeTab';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { LogOut, LayoutDashboard, Cake, Banknote, MapPin, User, Clock } from 'lucide-react';
-import logoGlow from '@/assets/logo-glow.png';
+import logoLight from '@/assets/logo-light.png';
 import logoDark from '@/assets/logo-dark.png';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/hooks/useTheme';
@@ -73,7 +73,7 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
           <div className="relative">
             <div className="absolute inset-0 blur-xl opacity-50 bg-primary/30 rounded-full animate-pulse" />
             <img 
-              src={theme === 'light' ? logoDark : logoGlow} 
+              src={theme === 'light' ? logoDark : logoLight}
               alt="hring logo" 
               className="h-8 md:h-12 w-auto animate-pulse-glow relative z-10"
             />

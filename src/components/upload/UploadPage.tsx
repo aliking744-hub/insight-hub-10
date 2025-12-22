@@ -5,7 +5,7 @@ import { toast } from '@/hooks/use-toast';
 import * as XLSX from 'xlsx';
 import { Employee } from '@/types/employee';
 import { parseExcelData, generateSampleData } from '@/utils/sampleData';
-import logoGlow from '@/assets/logo-glow.png';
+import logoLight from '@/assets/logo-light.png';
 import logoDark from '@/assets/logo-dark.png';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { useTheme } from '@/hooks/useTheme';
@@ -148,7 +148,7 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
           <div className="inline-flex items-center justify-center mb-6 relative">
             <div className="absolute inset-0 blur-2xl opacity-60 bg-primary/30 rounded-full animate-pulse" />
             <img 
-              src={theme === 'light' ? logoDark : logoGlow} 
+              src={theme === 'light' ? logoDark : logoLight}
               alt="hring logo" 
               className="h-16 md:h-20 w-auto animate-pulse-glow relative z-10"
             />
