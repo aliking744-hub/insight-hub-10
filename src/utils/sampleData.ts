@@ -8,6 +8,7 @@ const persianMonths = [
 const departments = ['مالی', 'فنی و اجرایی', 'برنامه ریزی و توسعه', 'بازرگانی', 'حقوقی', 'دفتر مدیرعامل'];
 const positions = ['کارشناس', 'مدیر', 'معاون', 'مشاور', 'خدمات'];
 const educations = ['دیپلم و زیردیپلم', 'کاردانی', 'کارشناسی', 'ارشد', 'دکترا'];
+const educationFields = ['مدیریت بازرگانی', 'حسابداری', 'مهندسی عمران', 'مهندسی صنایع', 'مهندسی برق', 'حقوق', 'اقتصاد', 'مدیریت صنعتی', 'مهندسی کامپیوتر', 'معماری', 'مهندسی مکانیک', 'علوم سیاسی'];
 const locations = ['پروژه', 'ستاد'];
 const regions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 const ageGroups = ['۲۰-۳۰', '۳۰-۴۰', '۴۰-۵۰', '۵۰+', '(Blank)'];
@@ -54,7 +55,7 @@ export function generateSampleData(count: number = 78): Employee[] {
       birthDate: birthDate,
       birthMonth: persianMonths[monthIndex],
       education: educations[Math.floor(Math.random() * educations.length)],
-      educationField: '(Blank)',
+      educationField: educationFields[Math.floor(Math.random() * educationFields.length)],
       maritalStatus: Math.random() > 0.3 ? 'متاهل' : 'مجرد',
       childrenCount: Math.floor(Math.random() * 4),
       department: departments[Math.floor(Math.random() * departments.length)],
