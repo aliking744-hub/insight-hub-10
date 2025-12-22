@@ -84,8 +84,10 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
   const handleDownloadTemplate = useCallback(() => {
     const templateData = [
       {
-        'نام': '',
-        'نام خانوادگی': '',
+        'ردیف': 1,
+        'کد پرسنلی': '10001',
+        'نام': '(اختیاری)',
+        'نام خانوادگی': '(اختیاری)',
         'جنسیت': 'مرد یا زن',
         'تاریخ تولد': '1370/01/15',
         'ماه تولد': 'فروردین',

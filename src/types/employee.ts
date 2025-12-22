@@ -1,8 +1,9 @@
 export interface Employee {
   id: string;
-  name: string;
-  lastName: string;
-  fullName: string;
+  personnelCode: string;
+  name?: string;
+  lastName?: string;
+  fullName?: string;
   gender: 'مرد' | 'زن';
   birthDate: string;
   birthMonth: string;
