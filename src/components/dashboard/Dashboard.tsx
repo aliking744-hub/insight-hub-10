@@ -70,11 +70,14 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 md:mb-6">
         <div className="flex items-center gap-3">
-          <img 
-            src={theme === 'light' ? logoDark : logoGlow} 
-            alt="hring logo" 
-            className={`h-8 md:h-12 w-auto ${theme === 'dark' ? 'animate-pulse-glow' : ''}`}
-          />
+          <div className="relative">
+            <div className="absolute inset-0 blur-xl opacity-50 bg-primary/30 rounded-full animate-pulse" />
+            <img 
+              src={theme === 'light' ? logoDark : logoGlow} 
+              alt="hring logo" 
+              className="h-8 md:h-12 w-auto animate-pulse-glow relative z-10"
+            />
+          </div>
           <div>
             <h1 className="text-xl md:text-3xl font-afarin gradient-text">داشبورد منابع انسانی</h1>
             <p className="text-muted-foreground text-xs md:text-sm mt-1 font-nazanin hidden sm:block">تحلیل و گزارش‌گیری اطلاعات پرسنلی</p>
