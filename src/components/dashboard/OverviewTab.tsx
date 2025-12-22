@@ -22,22 +22,37 @@ const COLORS = {
   blue: '#3b82f6',
 };
 
+// Calculate age from Persian date (Jalali)
+function calculateAgeFromPersianDate(birthDate: string): number | null {
+  if (!birthDate || birthDate.trim() === '') return null;
+  
+  // Parse Persian date (format: 1370/01/15 or ۱۳۷۰/۰۱/۱۵)
+  const persianToEnglish = (str: string) => str.replace(/[۰-۹]/g, d => '0123456789'['۰۱۲۳۴۵۶۷۸۹'.indexOf(d)]);
+  const normalizedDate = persianToEnglish(birthDate);
+  const parts = normalizedDate.split('/');
+  
+  if (parts.length !== 3) return null;
+  
+  const birthYear = parseInt(parts[0]);
+  if (isNaN(birthYear) || birthYear < 1300 || birthYear > 1410) return null;
+  
+  // Current Persian year (approximate: 2024 = 1403)
+  const currentPersianYear = 1403;
+  const age = currentPersianYear - birthYear;
+  
+  return age > 0 && age < 100 ? age : null;
+}
+
 export function OverviewTab({ data }: OverviewTabProps) {
   const totalStaff = data.length;
   const departments = [...new Set(data.map(e => e.department))].length;
   const avgSalary = Math.round(data.reduce((sum, e) => sum + e.salary, 0) / totalStaff);
   const avgTenure = Math.round(data.reduce((sum, e) => sum + e.tenure, 0) / totalStaff);
   
-  // Calculate average age from age groups
-  const ageGroupToAvg: Record<string, number> = {
-    '20-30': 25, '۲۰-۳۰': 25,
-    '30-40': 35, '۳۰-۴۰': 35,
-    '40-50': 45, '۴۰-۵۰': 45,
-    '50+': 55, '۵۰+': 55,
-  };
-  const validAges = data.filter(e => e.ageGroup && e.ageGroup !== 'blank' && e.ageGroup !== '' && ageGroupToAvg[e.ageGroup]);
-  const avgAgeNum = validAges.length > 0 
-    ? (validAges.reduce((sum, e) => sum + ageGroupToAvg[e.ageGroup], 0) / validAges.length).toFixed(2)
+  // Calculate average age from birth date
+  const ages = data.map(e => calculateAgeFromPersianDate(e.birthDate)).filter((age): age is number => age !== null);
+  const avgAgeNum = ages.length > 0 
+    ? (ages.reduce((sum, age) => sum + age, 0) / ages.length).toFixed(2)
     : '0';
   const avgAge = avgAgeNum.toString().replace(/[0-9]/g, d => '۰۱۲۳۴۵۶۷۸۹'[parseInt(d)]);
 
