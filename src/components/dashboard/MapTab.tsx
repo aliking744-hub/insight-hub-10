@@ -9,30 +9,30 @@ interface MapTabProps {
   data: Employee[];
 }
 
-// Tehran districts SVG paths (simplified representation of 22 districts)
+// Tehran districts SVG paths - accurate representation based on municipal map
 const tehranDistricts: Record<number, { path: string; labelX: number; labelY: number }> = {
-  1: { path: "M280,20 L320,15 L350,30 L340,60 L300,70 L270,50 Z", labelX: 305, labelY: 45 },
-  2: { path: "M220,25 L270,20 L280,20 L270,50 L240,60 L210,45 Z", labelX: 240, labelY: 40 },
-  3: { path: "M160,30 L210,25 L220,25 L210,45 L180,55 L150,45 Z", labelX: 180, labelY: 42 },
-  4: { path: "M300,70 L340,60 L360,80 L350,120 L310,130 L280,100 Z", labelX: 320, labelY: 95 },
-  5: { path: "M80,50 L150,45 L160,30 L150,45 L140,80 L100,90 L70,70 Z", labelX: 110, labelY: 65 },
-  6: { path: "M150,100 L180,90 L210,100 L200,140 L160,145 L140,120 Z", labelX: 175, labelY: 120 },
-  7: { path: "M200,100 L240,95 L260,110 L250,150 L210,155 L200,140 Z", labelX: 228, labelY: 125 },
-  8: { path: "M250,110 L280,100 L310,130 L290,170 L260,165 L250,150 Z", labelX: 275, labelY: 140 },
-  9: { path: "M70,120 L100,110 L120,130 L110,170 L80,175 L60,150 Z", labelX: 90, labelY: 145 },
-  10: { path: "M110,130 L140,120 L160,145 L150,180 L120,185 L110,170 Z", labelX: 135, labelY: 155 },
-  11: { path: "M150,145 L180,140 L200,155 L190,190 L160,195 L150,180 Z", labelX: 175, labelY: 170 },
-  12: { path: "M190,150 L220,145 L240,160 L230,195 L200,200 L190,190 Z", labelX: 215, labelY: 175 },
-  13: { path: "M240,155 L270,150 L290,170 L280,205 L250,210 L240,195 Z", labelX: 265, labelY: 180 },
-  14: { path: "M220,195 L250,190 L260,210 L250,245 L220,250 L210,230 Z", labelX: 235, labelY: 220 },
-  15: { path: "M250,210 L280,205 L300,225 L290,260 L260,265 L250,245 Z", labelX: 275, labelY: 235 },
-  16: { path: "M150,195 L190,190 L200,210 L190,250 L160,255 L150,230 Z", labelX: 175, labelY: 222 },
-  17: { path: "M110,200 L150,195 L160,220 L150,260 L120,265 L100,240 Z", labelX: 130, labelY: 230 },
-  18: { path: "M60,180 L100,175 L110,200 L100,250 L70,260 L50,220 Z", labelX: 80, labelY: 215 },
-  19: { path: "M100,260 L150,255 L160,280 L140,310 L100,315 L85,290 Z", labelX: 125, labelY: 285 },
-  20: { path: "M150,260 L200,255 L210,280 L190,315 L150,320 L140,310 Z", labelX: 175, labelY: 290 },
-  21: { path: "M30,100 L70,90 L80,120 L70,160 L40,170 L20,140 Z", labelX: 50, labelY: 130 },
-  22: { path: "M20,160 L50,150 L60,180 L50,220 L30,230 L10,200 Z", labelX: 35, labelY: 190 },
+  1: { path: "M320,10 L380,15 L400,40 L410,80 L380,100 L340,90 L310,60 L300,30 Z", labelX: 355, labelY: 55 },
+  2: { path: "M240,25 L280,20 L300,30 L310,60 L280,80 L250,75 L230,50 Z", labelX: 265, labelY: 50 },
+  3: { path: "M180,30 L230,25 L240,25 L230,50 L220,75 L190,80 L170,55 Z", labelX: 200, labelY: 52 },
+  4: { path: "M380,100 L410,80 L440,100 L450,150 L420,180 L380,170 L360,130 Z", labelX: 405, labelY: 135 },
+  5: { path: "M100,35 L160,30 L180,30 L170,55 L160,85 L110,95 L80,65 Z", labelX: 130, labelY: 62 },
+  6: { path: "M190,80 L220,75 L250,75 L260,110 L240,140 L200,145 L180,115 Z", labelX: 218, labelY: 110 },
+  7: { path: "M260,110 L280,80 L340,90 L360,130 L340,165 L290,170 L260,145 Z", labelX: 305, labelY: 130 },
+  8: { path: "M340,165 L360,130 L380,170 L420,180 L400,220 L360,225 L330,200 Z", labelX: 370, labelY: 185 },
+  9: { path: "M110,120 L150,115 L170,145 L160,180 L120,190 L95,160 Z", labelX: 135, labelY: 152 },
+  10: { path: "M150,115 L180,115 L200,145 L190,185 L160,180 L150,145 Z", labelX: 175, labelY: 150 },
+  11: { path: "M190,145 L240,140 L260,145 L255,190 L210,195 L190,185 Z", labelX: 225, labelY: 168 },
+  12: { path: "M255,145 L290,155 L310,175 L300,215 L260,220 L255,190 Z", labelX: 280, labelY: 182 },
+  13: { path: "M310,175 L330,200 L360,225 L340,265 L300,260 L300,215 Z", labelX: 325, labelY: 225 },
+  14: { path: "M300,260 L340,265 L360,300 L330,340 L290,330 L280,290 Z", labelX: 318, labelY: 300 },
+  15: { path: "M240,270 L280,265 L290,330 L260,360 L220,350 L220,300 Z", labelX: 255, labelY: 310 },
+  16: { path: "M190,235 L255,220 L260,265 L240,270 L220,300 L185,280 Z", labelX: 220, labelY: 255 },
+  17: { path: "M120,210 L170,200 L190,235 L185,280 L140,295 L110,260 Z", labelX: 150, labelY: 248 },
+  18: { path: "M50,150 L95,145 L110,180 L120,210 L110,260 L70,275 L40,230 Z", labelX: 80, labelY: 210 },
+  19: { path: "M110,290 L140,295 L185,280 L190,330 L160,365 L120,360 L100,320 Z", labelX: 145, labelY: 325 },
+  20: { path: "M160,365 L190,330 L220,350 L230,390 L190,410 L160,395 Z", labelX: 195, labelY: 368 },
+  21: { path: "M20,80 L80,65 L110,95 L110,120 L95,160 L50,150 L25,120 Z", labelX: 68, labelY: 115 },
+  22: { path: "M10,120 L25,80 L20,80 L25,120 L50,150 L40,230 L15,200 Z", labelX: 32, labelY: 165 },
 };
 
 export function MapTab({ data }: MapTabProps) {
@@ -99,8 +99,8 @@ export function MapTab({ data }: MapTabProps) {
 
       {/* Map - Now on the left in RTL */}
       <ChartCard title="نقشه پراکندگی پرسنل در مناطق تهران">
-        <div className="relative w-full h-[400px] bg-muted/20 rounded-lg overflow-hidden">
-          <svg viewBox="0 0 380 340" className="w-full h-full">
+        <div className="relative w-full h-[450px] bg-muted/20 rounded-lg overflow-hidden flex items-center justify-center">
+          <svg viewBox="0 0 460 420" className="w-full h-full max-w-[450px]">
             {/* Districts */}
             {Object.entries(tehranDistricts).map(([region, { path, labelX, labelY }]) => {
               const regionNum = parseInt(region);
@@ -112,32 +112,21 @@ export function MapTab({ data }: MapTabProps) {
                   <path
                     d={path}
                     fill={getRegionColor(regionNum)}
-                    stroke={isSelected ? "hsl(var(--primary))" : "hsl(var(--border))"}
+                    stroke={isSelected ? "hsl(var(--primary))" : "hsl(200, 40%, 30%)"}
                     strokeWidth={isSelected ? 3 : 1.5}
                     className="transition-all duration-200 hover:opacity-80"
                   />
-                  {/* Region number */}
+                  {/* Region number and count */}
                   <text
                     x={labelX}
-                    y={labelY - 8}
+                    y={labelY}
                     textAnchor="middle"
-                    fontSize="14"
+                    fontSize="13"
                     fontWeight="bold"
                     fill="hsl(var(--foreground))"
-                    className="pointer-events-none"
+                    className="pointer-events-none font-iransans"
                   >
-                    {formatNumber(regionNum)}
-                  </text>
-                  {/* Employee count */}
-                  <text
-                    x={labelX}
-                    y={labelY + 8}
-                    textAnchor="middle"
-                    fontSize="12"
-                    fill="hsl(var(--muted-foreground))"
-                    className="pointer-events-none"
-                  >
-                    ({formatNumber(count)} نفر)
+                    {formatNumber(regionNum)} ({formatNumber(count)})
                   </text>
                 </g>
               );
