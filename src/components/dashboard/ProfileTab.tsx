@@ -113,11 +113,10 @@ export function ProfileTab({ data }: ProfileTabProps) {
   const formatNumber = (num: number) => new Intl.NumberFormat('fa-IR').format(num);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" dir="rtl">
       {/* Employee Selector */}
       <div className="glass-card rounded-lg p-4">
-        <div className="flex items-center gap-4">
-          <label className="text-sm text-muted-foreground">نام و نام خانوادگی:</label>
+        <div className="flex items-center gap-4 justify-end">
           <Select
             value={selectedEmployee.id}
             onValueChange={(value) => {
@@ -125,15 +124,16 @@ export function ProfileTab({ data }: ProfileTabProps) {
               if (emp) setSelectedEmployee(emp);
             }}
           >
-            <SelectTrigger className="w-[200px] bg-muted border-border">
+            <SelectTrigger className="w-[200px] bg-muted border-border text-right">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
               {data.map((emp) => (
-                <SelectItem key={emp.id} value={emp.id}>{emp.fullName}</SelectItem>
+                <SelectItem key={emp.id} value={emp.id} className="text-right">{emp.fullName}</SelectItem>
               ))}
             </SelectContent>
           </Select>
+          <label className="text-sm text-muted-foreground">:نام و نام خانوادگی</label>
         </div>
       </div>
 
