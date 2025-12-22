@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Upload, FileSpreadsheet, ChevronLeft, Sparkles, Database } from 'lucide-react';
+import { Upload, FileSpreadsheet, ChevronLeft, Sparkles, Database, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import * as XLSX from 'xlsx';
@@ -81,6 +81,53 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
     onDataLoaded(sampleData);
   }, [onDataLoaded]);
 
+  const handleDownloadTemplate = useCallback(() => {
+    const templateData = [
+      {
+        'نام': '',
+        'نام خانوادگی': '',
+        'جنسیت': 'مرد یا زن',
+        'تاریخ تولد': '1370/01/15',
+        'ماه تولد': 'فروردین',
+        'مدرک تحصیلی': 'لیسانس',
+        'رشته تحصیلی': 'مهندسی کامپیوتر',
+        'وضعیت تاهل': 'متاهل یا مجرد',
+        'تعداد فرزندان': 0,
+        'معاونت': 'معاونت فناوری',
+        'جایگاه شغلی': 'کارشناس',
+        'نوع استخدام': 'قراردادی',
+        'تاریخ استخدام': '1395/06/01',
+        'منطقه': 1,
+        'حقوق': 50000000,
+        'حقوق قراردادی': 45000000,
+        'اضافه کاری (ساعت)': 20,
+        'نمره ارزیابی': 85,
+        'ارزیابی مدیرعامل': 80,
+        'ارزیابی فردی': 90,
+        'ارزیابی معاونت': 85,
+        'ارزیابی همکاران': 82,
+        'نمره عملکرد': 88,
+        'نمره دانش و تخصص': 85,
+        'نمره تعامل و رفتار': 90,
+        'نمره مسئولیت': 87,
+      }
+    ];
+
+    const worksheet = XLSX.utils.json_to_sheet(templateData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'کارمندان');
+    
+    // Set column widths
+    worksheet['!cols'] = Object.keys(templateData[0]).map(() => ({ wch: 20 }));
+    
+    XLSX.writeFile(workbook, 'نمونه_اطلاعات_کارمندان.xlsx');
+    
+    toast({
+      title: 'دانلود موفق',
+      description: 'فایل نمونه اکسل دانلود شد',
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-2xl">
@@ -145,8 +192,22 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
           </label>
         </div>
 
-        {/* Demo Button */}
-        <div className="mt-6 text-center">
+        {/* Action Buttons */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+          {/* Download Template Button */}
+          <div className="relative inline-block">
+            <div className="absolute inset-0 bg-chart-cyan/20 blur-xl rounded-full" />
+            <Button
+              variant="outline"
+              onClick={handleDownloadTemplate}
+              className="relative gap-2 px-6 py-3 border-chart-cyan/50 hover:bg-chart-cyan/10"
+            >
+              <Download className="w-4 h-4 text-chart-cyan" />
+              <span>دانلود فایل نمونه اکسل</span>
+            </Button>
+          </div>
+
+          {/* Demo Button */}
           <div className="relative inline-block">
             <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
             <Button
@@ -159,10 +220,10 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
               <ChevronLeft className="w-4 h-4" />
             </Button>
           </div>
-          <p className="text-xs text-muted-foreground mt-3">
-            برای تست داشبورد بدون آپلود فایل
-          </p>
         </div>
+        <p className="text-xs text-muted-foreground mt-3 text-center">
+          فایل نمونه را دانلود کنید، اطلاعات کارمندان را پر کنید و آپلود کنید
+        </p>
 
         {/* Features */}
         <div className="grid grid-cols-3 gap-4 mt-12">
