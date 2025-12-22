@@ -145,11 +145,12 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
       <div className="w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center mb-6">
+          <div className="inline-flex items-center justify-center mb-6 relative">
+            <div className="absolute inset-0 blur-2xl opacity-60 bg-primary/30 rounded-full animate-pulse" />
             <img 
               src={theme === 'light' ? logoDark : logoGlow} 
               alt="hring logo" 
-              className={`h-16 md:h-20 w-auto ${theme === 'dark' ? 'animate-pulse-glow' : ''}`}
+              className="h-16 md:h-20 w-auto animate-pulse-glow relative z-10"
             />
           </div>
           <h1 className="text-2xl md:text-4xl font-bold gradient-text mb-3">
