@@ -10,30 +10,30 @@ interface MapTabProps {
   data: Employee[];
 }
 
-// Position and click areas for each region on the map image (percentage-based)
+// Position and click areas for each region on the map image (percentage-based, calibrated to actual map)
 const regionClickAreas: Record<number, { x: number; y: number; width: number; height: number }> = {
-  1: { x: 63, y: 5, width: 12, height: 15 },
-  2: { x: 45, y: 10, width: 10, height: 12 },
-  3: { x: 35, y: 8, width: 10, height: 14 },
-  4: { x: 72, y: 18, width: 14, height: 18 },
-  5: { x: 22, y: 8, width: 14, height: 15 },
-  6: { x: 42, y: 22, width: 10, height: 14 },
-  7: { x: 52, y: 22, width: 10, height: 14 },
-  8: { x: 64, y: 30, width: 12, height: 15 },
-  9: { x: 24, y: 32, width: 10, height: 12 },
-  10: { x: 34, y: 32, width: 10, height: 12 },
-  11: { x: 42, y: 36, width: 10, height: 12 },
-  12: { x: 52, y: 38, width: 10, height: 14 },
-  13: { x: 64, y: 45, width: 12, height: 15 },
-  14: { x: 64, y: 60, width: 12, height: 18 },
-  15: { x: 52, y: 62, width: 12, height: 18 },
-  16: { x: 42, y: 54, width: 12, height: 14 },
-  17: { x: 30, y: 50, width: 12, height: 16 },
-  18: { x: 14, y: 42, width: 14, height: 22 },
-  19: { x: 28, y: 66, width: 14, height: 18 },
-  20: { x: 42, y: 75, width: 12, height: 16 },
-  21: { x: 10, y: 20, width: 14, height: 18 },
-  22: { x: 4, y: 8, width: 10, height: 18 },
+  1: { x: 68, y: 4, width: 11, height: 14 },
+  2: { x: 48, y: 8, width: 10, height: 12 },
+  3: { x: 38, y: 6, width: 10, height: 14 },
+  4: { x: 76, y: 16, width: 12, height: 18 },
+  5: { x: 26, y: 6, width: 12, height: 14 },
+  6: { x: 46, y: 20, width: 10, height: 14 },
+  7: { x: 54, y: 20, width: 10, height: 14 },
+  8: { x: 66, y: 28, width: 12, height: 16 },
+  9: { x: 28, y: 30, width: 9, height: 12 },
+  10: { x: 37, y: 30, width: 9, height: 12 },
+  11: { x: 46, y: 34, width: 10, height: 12 },
+  12: { x: 54, y: 36, width: 10, height: 14 },
+  13: { x: 66, y: 42, width: 12, height: 16 },
+  14: { x: 66, y: 56, width: 12, height: 18 },
+  15: { x: 54, y: 58, width: 12, height: 18 },
+  16: { x: 44, y: 50, width: 10, height: 14 },
+  17: { x: 32, y: 46, width: 12, height: 16 },
+  18: { x: 18, y: 38, width: 14, height: 22 },
+  19: { x: 32, y: 62, width: 12, height: 18 },
+  20: { x: 44, y: 72, width: 12, height: 16 },
+  21: { x: 14, y: 18, width: 14, height: 18 },
+  22: { x: 6, y: 4, width: 10, height: 20 },
 };
 
 export function MapTab({ data }: MapTabProps) {
