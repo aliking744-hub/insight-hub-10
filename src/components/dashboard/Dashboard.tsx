@@ -11,13 +11,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { LogOut, LayoutDashboard, Cake, Banknote, MapPin, User, Clock } from 'lucide-react';
 import logoGlow from '@/assets/logo-glow.png';
+import logoDark from '@/assets/logo-dark.png';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { useTheme } from '@/hooks/useTheme';
 interface DashboardProps {
   data: Employee[];
   onLogout: () => void;
 }
 
 export function Dashboard({ data, onLogout }: DashboardProps) {
+  const { theme } = useTheme();
   const [filters, setFilters] = useState<FilterState>({
     gender: 'All',
     education: 'All',
@@ -68,9 +71,9 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 md:mb-6">
         <div className="flex items-center gap-3">
           <img 
-            src={logoGlow} 
+            src={theme === 'light' ? logoDark : logoGlow} 
             alt="hring logo" 
-            className="h-8 md:h-12 w-auto animate-pulse-glow"
+            className={`h-8 md:h-12 w-auto ${theme === 'dark' ? 'animate-pulse-glow' : ''}`}
           />
           <div>
             <h1 className="text-xl md:text-3xl font-afarin gradient-text">داشبورد منابع انسانی</h1>
