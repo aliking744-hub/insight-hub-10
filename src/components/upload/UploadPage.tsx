@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { Upload, FileSpreadsheet, ChevronLeft, Sparkles, Download } from 'lucide-react';
+import { Upload, FileSpreadsheet, ChevronLeft, Sparkles, Download, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from '@/hooks/use-toast';
 import * as XLSX from 'xlsx';
@@ -141,6 +141,14 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
       {/* Theme Toggle - Fixed position */}
       <div className="fixed top-4 left-4 z-50">
         <ThemeToggle />
+      </div>
+
+      {/* Back Button - Fixed position */}
+      <div className="fixed top-4 right-4 z-50">
+        <Button variant="outline" className="gap-2 font-iransans text-sm">
+          <ArrowRight className="w-4 h-4" />
+          <span className="hidden sm:inline">بازگشت</span>
+        </Button>
       </div>
       
       <div className="w-full max-w-2xl">
