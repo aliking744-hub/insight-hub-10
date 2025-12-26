@@ -145,10 +145,12 @@ export function UploadPage({ onDataLoaded }: UploadPageProps) {
 
       {/* Back Button - Fixed position */}
       <div className="fixed top-4 right-4 z-50">
-        <Button variant="outline" className="gap-2 font-iransans text-sm">
-          <ArrowRight className="w-4 h-4" />
-          <span className="hidden sm:inline">بازگشت</span>
-        </Button>
+        <a href="https://id-preview--3c184b65-5e37-4cde-b5c7-686da2ccb6c9.lovable.app/?__lovable_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiamtLVVd2dlZiSFh1ellPRE5xQzM0a2VjNXZ1MSIsInByb2plY3RfaWQiOiIzYzE4NGI2NS01ZTM3LTRjZGUtYjVjNy02ODZkYTJjY2I2YzkiLCJub25jZSI6IjJiYjBmODJjMjQwNWZmZjIxNzljNWMzNzdiYmU1ZGFlIiwiaXNzIjoibG92YWJsZS1hcGkiLCJzdWIiOiIzYzE4NGI2NS01ZTM3LTRjZGUtYjVjNy02ODZkYTJjY2I2YzkiLCJhdWQiOlsibG92YWJsZS1hcHAiXSwiZXhwIjoxNzY3MzY2NTYzLCJuYmYiOjE3NjY3NjE3NjMsImlhdCI6MTc2Njc2MTc2M30.LLAXOacty_C9LzroavMTJXy6-BOe9sJg6AwBu0mdtLc">
+          <Button variant="outline" className="gap-2 font-iransans text-sm">
+            <ArrowRight className="w-4 h-4" />
+            <span className="hidden sm:inline">بازگشت</span>
+          </Button>
+        </a>
       </div>
       
       <div className="w-full max-w-2xl">
