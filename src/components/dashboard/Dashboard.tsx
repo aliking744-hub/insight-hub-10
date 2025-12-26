@@ -9,7 +9,7 @@ import { ProfileTab } from './ProfileTab';
 import { OvertimeTab } from './OvertimeTab';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { LogOut, LayoutDashboard, Cake, Banknote, MapPin, User, Clock } from 'lucide-react';
+import { LogOut, LayoutDashboard, Cake, Banknote, MapPin, User, Clock, ArrowRight } from 'lucide-react';
 import logoLight from '@/assets/logo-light.png';
 import logoDark from '@/assets/logo-dark.png';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -85,6 +85,10 @@ export function Dashboard({ data, onLogout }: DashboardProps) {
         </div>
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          <Button variant="outline" onClick={() => window.history.back()} className="gap-2 font-iransans text-sm">
+            <ArrowRight className="w-4 h-4" />
+            <span className="hidden sm:inline">بازگشت</span>
+          </Button>
           <Button variant="outline" onClick={onLogout} className="gap-2 font-iransans text-sm">
             <LogOut className="w-4 h-4" />
             <span className="hidden sm:inline">خروج</span>
